@@ -1,7 +1,20 @@
-import Article from "./article/app";
+import dotenv from "dotenv";
+import { IBlogArticle } from "./components/IBlogArticle";
 import Navbar from "./components/Navbar";
+import ArticleCard from "./components/ArticleCard";
 
-export default function Home() {
+dotenv.config();
+
+async function getData() {
+  const res = await fetch(process.env.NEXT_PUBLIC_API_URI + `/api/v1/blogs`);
+  if (!res.ok) throw new Error("Failed to fetch data");
+  const json = await res.json();
+  return json.blogPosts;
+}
+
+export default async function Home() {
+  const data: IBlogArticle[] = await getData();
+
   return (
     // <Article />
 
@@ -20,17 +33,9 @@ export default function Home() {
       </div>
 
       <div className="grid grid-cols-1 gap-4 my-8 md:grid-cols-2 lg:grid-cols-4 lg:gap-8 place-items-center">
-        <div className="flex flex-col justify-between w-56 h-56 px-6 py-8 text-xs text-center align-middle shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] rounded-lg">
-          <div className="flex flex-col gap-2">
-            <h1 className="text-3xl font-bold">Title here</h1>
-            <p className="font-light">Some other stuff here</p>
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <p className="">06/07/2023</p>
-            <button className="w-full p-1 bg-gray-200">View Post</button>
-          </div>
-        </div>
+        {data.map((blogArticle) => {
+          return <ArticleCard blogArticle={blogArticle} />;
+        })}
       </div>
     </main>
   );
