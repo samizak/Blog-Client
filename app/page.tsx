@@ -1,7 +1,10 @@
+import Article from "./article/app";
 import Navbar from "./components/Navbar";
 
 export default function Home() {
   return (
+    // <Article />
+
     <main className="">
       <Navbar />
 
