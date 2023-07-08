@@ -15,3 +15,8 @@ This is the frontend Client for the blog application.
 
 ### Reading Articles
 ![Untitled](https://github.com/samizak/Blog-Client/assets/30938455/d3b0df54-bdbb-426b-af30-6748ce453605)
+
+## Technologies
+* TypeScript
+* NextJS
+* Tailwind CSS
