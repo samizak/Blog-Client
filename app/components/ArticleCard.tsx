@@ -1,5 +1,8 @@
+"use client";
+
 import React from "react";
 import { IBlogArticle } from "./IBlogArticle";
+import Link from "next/link";
 
 export default function ArticleCard({ blogArticle }: { blogArticle: IBlogArticle }) {
   return (
@@ -11,8 +14,20 @@ export default function ArticleCard({ blogArticle }: { blogArticle: IBlogArticle
 
       <div className="flex flex-col gap-2">
         <p className="">{new Date(blogArticle.createdAt).toDateString()}</p>
-        <button className="w-full p-1 bg-gray-200">View Post</button>
+
+        <Link
+          className="w-full p-1 bg-gray-200"
+          // className="flex px-3 py-2 mt-4 text-sm text-white align-middle transition-colors bg-green-600 rounded cursor-pointer hover:bg-green-800 w-fit"
+          href={{
+            pathname: "/article",
+            query: { id: blogArticle._id },
+          }}
+        >
+          View Post
+        </Link>
       </div>
     </div>
   );
 }
+
+async function ViewPost(blogArticle: IBlogArticle) {}
