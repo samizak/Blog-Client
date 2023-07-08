@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "../components/Navbar";
 
 async function getData(id: string) {
-  const res = await fetch(process.env.NEXT_PUBLIC_API_URI + `/api/v1/blogs/${id}`);
+  const res = await fetch(process.env.NEXT_PUBLIC_API_URI + `/api/v1/blogs/${id}`, { cache: "no-store" });
   if (!res.ok) throw new Error("Failed to fetch data");
   return res.json();
 }
@@ -25,7 +25,14 @@ export default async function Article({ searchParams }: any) {
       <div className="flex flex-col justify-center px-48 py-16 align-middle">
         <h1 className="text-3xl font-bold">{title}</h1>
         <p className="text-xs font-light">{"Created at: " + createdAt}</p>
-        <p className="mt-4">{content}</p>
+        <div className="mt-4">
+          {content
+            .split("\n")
+            .filter(Boolean)
+            .map((e) => {
+              return <p className="mb-3">{e}</p>;
+            })}
+        </div>
       </div>
     </div>
   );
