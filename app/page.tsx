@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import { IBlogArticle } from "./components/IBlogArticle";
 import Navbar from "./components/Navbar";
 import ArticleCard from "./components/ArticleCard";
+import Dashboard from "./dashboard/page";
 
 dotenv.config();
 
@@ -17,26 +18,6 @@ export default async function Home() {
 
   return (
     // <Article />
-
-    <main className="">
-      <Navbar />
-
-      <div className="flex flex-col w-full bg-gray-200 border-b-2">
-        <div className="flex flex-col gap-8 m-8">
-          <h1 className="text-5xl font-bold">Lorem ipsum</h1>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat.
-          </p>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 gap-4 my-8 md:grid-cols-2 lg:grid-cols-4 lg:gap-8 place-items-center">
-        {data.map((blogArticle) => {
-          return <ArticleCard blogArticle={blogArticle} />;
-        })}
-      </div>
-    </main>
+    <Dashboard />
   );
 }
